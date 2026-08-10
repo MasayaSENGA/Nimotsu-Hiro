@@ -45,7 +45,7 @@
 
       const title = document.createElement('div');
       title.className = 'tracking-title';
-      title.innerText = `📦 伝票番号「${trackingId}」`;
+      title.innerText = `📦 にもつひろ ｜ 伝票番号「${trackingId}」`;
       container.appendChild(title);
 
       const linkWrapper = document.createElement('div');
