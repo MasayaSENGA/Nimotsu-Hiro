@@ -1,0 +1,80 @@
+/*
+ * にもつひろ - 検索結果に差し込むカードのスタイル
+ *
+ * content_scripts の "css" として宣言することで拡張機能オリジンとして注入され、
+ * Google 側の Content Security Policy の影響を受けない。
+ */
+
+#nimotsu-hiro {
+  margin: 15px 0;
+  padding: 16px;
+  border: 1px solid #dadce0;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.1);
+}
+
+#nimotsu-hiro .nimotsu-hiro-title {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #202124;
+}
+
+#nimotsu-hiro .nimotsu-hiro-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#nimotsu-hiro .nimotsu-hiro-link {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+#nimotsu-hiro .nimotsu-hiro-link:hover {
+  opacity: 0.8;
+}
+
+#nimotsu-hiro .nimotsu-hiro-link:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+/* 運送会社ごとのブランドカラー */
+#nimotsu-hiro .nimotsu-hiro-link--yamato {
+  background-color: #fee100;
+  color: #000000;
+}
+
+#nimotsu-hiro .nimotsu-hiro-link--sagawa {
+  background-color: #004098;
+  color: #ffffff;
+}
+
+#nimotsu-hiro .nimotsu-hiro-link--japanpost {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  #nimotsu-hiro {
+    background-color: #202124;
+    border-color: #3c4043;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  #nimotsu-hiro .nimotsu-hiro-title {
+    color: #e8eaed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #nimotsu-hiro .nimotsu-hiro-link {
+    transition: none;
+  }
+}

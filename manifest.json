@@ -1,16 +1,23 @@
 {
   "manifest_version": 3,
   "name": "にもつひろ",
-  "version": "1.2",
+  "version": "2.0",
   "description": "伝票番号をGoogle検索すると、にもつひろが荷物の追跡リンクをすぐにお届けします。",
+  "author": "Masaya Senga",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
-    "128": "icons/icon128.png"},
+    "128": "icons/icon128.png"
+  },
   "content_scripts": [
     {
-      "matches": ["https://www.google.com/search?*"],
-      "js": ["content.js"]
+      "matches": [
+        "https://*.google.com/search*",
+        "https://*.google.co.jp/search*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
     }
   ]
 }

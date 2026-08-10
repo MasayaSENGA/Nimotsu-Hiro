@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# エディタ
+.vscode/
+.idea/
+*.swp
+
+# 配布用パッケージ
+*.zip
+*.crx
+*.pem
