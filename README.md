@@ -8,15 +8,17 @@
 
 ### Chrome ウェブストアから
 
-Chrome ウェブストアでの公開に向けて準備中です。公開後は、ストアのページで「Chrome に追加」を押すだけでインストールできます。
+Chrome ウェブストアで公開しています。ストアのページで「Chrome に追加」を押すだけでインストールできます。
 
-（公開後にストアURLを記載）
+https://chromewebstore.google.com/detail/ikjkommgenpjhpkoflciigpmmnkbakgp
+
+2026年10月5日時点でストアに公開しているのは 1.2 です。このリポジトリの 2.0（google.co.jp への対応、全角ハイフンへの対応、チェックディジットによる判定など）は、次の更新として提出する版です。
 
 ### 開発者モードで読み込む
 
-ストアを使わずにソースコードから試す場合は、開発者モードで読み込みます。
+このリポジトリは非公開です。開発中のコードを試す場合は、開発者モードで読み込みます。
 
-1. このリポジトリを clone またはダウンロードする
+1. このリポジトリを clone する
 2. Chrome で `chrome://extensions` を開く
 3. 右上の「デベロッパー モード」を有効にする
 4. 「パッケージ化されていない拡張機能を読み込む」からこのフォルダを選択する
@@ -55,7 +57,7 @@ EM123456789JP
 
 インストール時に Chrome は「www.google.com 上にあるデータの読み取りと変更」といった趣旨の確認を表示します。この確認はサイト（ホスト名）単位の表示で、`/search` のようなパスまでは示されません。また、国別のドメインだけが違う www.google.co.jp は、www.google.com にまとめて表示されます。実際に動作するのは、上記の 2 つのホストの検索結果ページだけです。
 
-データの取り扱いについて詳しくは、[プライバシーポリシー](PRIVACY.md) をご覧ください。
+プライバシーポリシーは https://privacy.love-live.jp/ で公開しています。全拡張機能で共通のポリシーで、このリポジトリとは別の、プライバシーポリシー用のリポジトリで管理しています。
 
 ## ファイル構成
 
@@ -64,7 +66,6 @@ manifest.json   拡張機能のマニフェスト（Manifest V3）
 content.js      検出とリンク挿入のロジック
 content.css     差し込むカードのスタイル
 icons/          アイコン（16 / 48 / 128px）
-PRIVACY.md      プライバシーポリシー
 LICENSE         ライセンス（MIT）
 scripts/        配布用 ZIP の作成とストア画像の生成スクリプト
 store/          Chrome ウェブストアの掲載文・画像素材・公開手順
@@ -80,7 +81,7 @@ store/          Chrome ウェブストアの掲載文・画像素材・公開手
 
 ## Chrome ウェブストアへの公開
 
-公開と更新の手順は [store/README.md](store/README.md) にまとめています。アップロード用の ZIP は、リポジトリのルートで次のコマンドを実行すると `dist/nimotsu-hiro-<version>.zip` に作成されます。
+更新版を出す手順は [store/README.md](store/README.md) にまとめています。アップロード用の ZIP は、リポジトリのルートで次のコマンドを実行すると `dist/nimotsu-hiro-<version>.zip` に作成されます。
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\package.ps1
