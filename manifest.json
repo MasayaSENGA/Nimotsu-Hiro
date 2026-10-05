@@ -2,8 +2,9 @@
   "manifest_version": 3,
   "name": "にもつひろ",
   "version": "2.0",
-  "description": "伝票番号をGoogle検索すると、にもつひろが荷物の追跡リンクをすぐにお届けします。",
+  "description": "伝票番号を Google で検索するだけで、ヤマト運輸・佐川急便・日本郵便の追跡リンクを、にもつひろが検索結果の先頭にお届けします。",
   "author": "Masaya Senga",
+  "homepage_url": "https://github.com/MasayaSENGA/Nimotsu-Hiro",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -12,8 +13,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*.google.com/search*",
-        "https://*.google.co.jp/search*"
+        "https://www.google.com/search*",
+        "https://www.google.co.jp/search*"
       ],
       "js": ["content.js"],
       "css": ["content.css"],
