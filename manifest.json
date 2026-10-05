@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "にもつひろ",
-  "version": "2.0",
+  "version": "2.0.1",
   "description": "伝票番号を Google で検索するだけで、ヤマト運輸・佐川急便・日本郵便の追跡リンクを、にもつひろが検索結果の先頭にお届けします。",
   "author": "Masaya Senga",
   "icons": {
