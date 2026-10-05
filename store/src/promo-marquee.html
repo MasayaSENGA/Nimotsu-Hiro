@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>promo-marquee 1400x560</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  .copy {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 96px;
+    width: 660px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 6px;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .title-row .app-icon {
+    width: 128px;
+    height: 128px;
+    border-radius: 24px;
+  }
+
+  .title-row .app-name {
+    font-size: 86px;
+  }
+
+  /* 文字は名前と1行のキャッチコピーだけにする（小さいタイルと同じ文言） */
+  .tagline {
+    margin-top: 34px;
+    color: #ffffff;
+    font-size: 29px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(10, 60, 120, 0.22);
+  }
+
+  .browser {
+    left: 790px;
+    top: 92px;
+    width: 560px;
+    height: 520px;
+  }
+</style>
+</head>
+<body>
+<main class="canvas canvas--marquee">
+  <div class="speed" style="left: 40px; top: 44px;" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="speed" style="right: 64px; top: 30px; transform: scaleX(-1);" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <section class="copy">
+    <div class="title-row">
+      <span class="icon-wrap"><img class="app-icon" src="../../icons/icon128.png" alt=""></span>
+      <h1 class="app-name">にもつひろ</h1>
+    </div>
+    <p class="tagline">伝票番号を検索するだけで、追跡リンクをお届け</p>
+  </section>
+
+  <div class="browser browser--bleed">
+    <div class="browser-bar">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <div class="address">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor"/><path d="M5.2 7V5.2a2.8 2.8 0 0 1 5.6 0V7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>google.com/search?q=<b>1234-5678-9013</b></span>
+      </div>
+    </div>
+    <div class="viewport" style="--vw: 560px; --vh: 464px; --scale: 1.2;">
+      <iframe src="mock-serp.html?q=1234-5678-9013&amp;col=390" title="検索結果のモック"></iframe>
+    </div>
+  </div>
+</main>
+</body>
+</html>

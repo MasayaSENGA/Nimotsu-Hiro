@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>promo-small 440x280</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  .tile {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding-bottom: 4px;
+  }
+
+  .tile .app-icon {
+    width: 112px;
+    height: 112px;
+    border-radius: 21px;
+  }
+
+  .tile .app-name {
+    font-size: 46px;
+  }
+
+  .tagline {
+    margin-top: 12px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+  }
+
+  .tagline em {
+    font-style: normal;
+    color: #fff3d6;
+  }
+</style>
+</head>
+<body>
+<main class="canvas canvas--small">
+  <div class="speed" style="left: 26px; top: 26px; transform: scale(0.6); transform-origin: 0 0;" aria-hidden="true"><i></i><i></i><i></i></div>
+  <!-- 中心を基準に左右反転＋縮小し、左上の飾りと点対称の位置（端から同じ距離）に収める -->
+  <div class="speed" style="right: 11px; bottom: 14px; transform: scale(-0.6, 0.6); transform-origin: 50% 50%;" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="tile">
+    <span class="icon-wrap"><img class="app-icon" src="../../icons/icon128.png" alt=""></span>
+    <div>
+      <p class="app-name">にもつひろ</p>
+      <p class="tagline">伝票番号を検索するだけで<br>追跡リンクをお届け</p>
+    </div>
+  </div>
+</main>
+</body>
+</html>

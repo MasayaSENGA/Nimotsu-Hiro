@@ -1,0 +1,211 @@
+/*
+ * モック検索結果ページ（ストア画像専用）
+ * 実在サービスの見た目は真似せず、主役のカード以外はやわらかいスケルトンで描く。
+ */
+
+:root {
+  --page-bg: #ffffff;
+  --text: #202124;
+  --muted: #5f6368;
+  --line: #dfe1e5;
+  --skeleton: #eceff3;
+  --skeleton-strong: #e1e6ec;
+  --skeleton-title: #d9e6f6;
+  --tab-active: #5baaf0;
+  --col: 600px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #202124;
+    --text: #e8eaed;
+    --muted: #9aa0a6;
+    --line: #3c4043;
+    --skeleton: #2c2e31;
+    --skeleton-strong: #35373b;
+    --skeleton-title: #2f3b4a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--text);
+  font-family: "Noto Sans JP", "Yu Gothic UI", "Meiryo", sans-serif;
+  /* 本物の検索結果ページ同様、カードのフォントはページから継承される */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- ヘッダー（検索ボックス + タブ） ---- */
+.serp-header {
+  padding: 22px 0 0 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+.searchbox {
+  display: flex;
+  align-items: center;
+  width: var(--col);
+  height: 46px;
+  padding: 0 18px 0 22px;
+  border: 1px solid var(--line);
+  border-radius: 23px;
+  background: var(--page-bg);
+  box-shadow: 0 1px 4px rgba(32, 33, 36, 0.12);
+}
+
+.searchbox-text {
+  flex: 1;
+  overflow: hidden;
+  font-size: 17px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.searchbox-clear {
+  width: 1px;
+  height: 24px;
+  margin: 0 14px;
+  background: var(--line);
+}
+
+.searchbox-icon {
+  width: 22px;
+  height: 22px;
+  color: #5baaf0;
+}
+
+.tabs {
+  display: flex;
+  gap: 26px;
+  padding: 18px 0 0 6px;
+}
+
+.tab {
+  position: relative;
+  width: 42px;
+  height: 10px;
+  margin-bottom: 14px;
+  border-radius: 5px;
+  background: var(--skeleton-strong);
+}
+
+.tab--short {
+  width: 30px;
+}
+
+.tab.is-active {
+  background: var(--tab-active);
+  opacity: 0.55;
+}
+
+.tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  bottom: -15px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--tab-active);
+}
+
+/* ---- 検索結果カラム（content.js がここの先頭にカードを差し込む） ---- */
+#rcnt {
+  width: var(--col);
+  margin: 0 0 0 40px;
+  padding-top: 4px;
+}
+
+.result {
+  padding: 18px 0 14px;
+}
+
+.result-site {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.favicon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--skeleton-strong);
+}
+
+.line {
+  height: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: var(--skeleton);
+}
+
+.line--site {
+  width: 30%;
+  margin: 0;
+}
+
+.line--title {
+  width: 70%;
+  height: 16px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  background: var(--skeleton-title);
+}
+
+.line--title-b {
+  width: 60%;
+}
+
+.line--title-c {
+  width: 78%;
+}
+
+.line--text {
+  width: 100%;
+}
+
+.line--short {
+  width: 72%;
+}
+
+.line--short-b {
+  width: 58%;
+}
+
+/* ---- bare=1: カードだけを透明背景で表示 ---- */
+html.is-bare,
+html.is-bare body {
+  background: transparent;
+}
+
+html.is-bare body {
+  padding: 8px 10px 14px;
+}
+
+html.is-bare .serp-header,
+html.is-bare .result {
+  display: none;
+}
+
+html.is-bare #rcnt {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* カードの外側の余白だけを詰める（カード自体の見た目は content.css のまま） */
+html.is-bare #nimotsu-hiro {
+  margin: 0;
+}

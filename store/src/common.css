@@ -1,0 +1,390 @@
+/*
+ * にもつひろ - Chrome ウェブストア用画像の共通スタイル
+ * scripts/render-store-assets.ps1 がヘッドレス Chrome で各 HTML を PNG に書き出す。
+ * 色はアイコン（青 #5baaf0 + 段ボール色）から取っている。
+ */
+
+:root {
+  --blue: #5baaf0;
+  --blue-light: #7cc0f6;
+  --blue-dark: #3a8ddd;
+  --navy: #0f3a63;
+  --ink: #1d2733;
+  --muted: #5a6878;
+  --box: #e8b26e;
+  --box-light: #f3c78c;
+  --panel: #ffffff;
+  --panel-line: #e3eaf2;
+  --font: "Noto Sans JP", "BIZ UDPGothic", "Yu Gothic UI", "Meiryo", sans-serif;
+  /* 外枠のページ自体はライト固定。ダーク表示はカード側（iframe）だけで行う */
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  font-family: var(--font);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-autospace: normal;
+  font-kerning: normal;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+/* ---------- キャンバス ---------- */
+.canvas {
+  position: relative;
+  overflow: hidden;
+  /*
+   * 白い文字が背景に負けないよう、アイコンの青（#5baaf0）より一段濃い青を使う。
+   * 見出しまわりで白文字とのコントラスト比 3.5:1 以上を目安にしている。
+   */
+  background:
+    radial-gradient(900px 520px at 12% -8%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 62%),
+    radial-gradient(760px 520px at 105% 108%, rgba(10, 60, 140, 0.24) 0%, rgba(10, 60, 140, 0) 65%),
+    linear-gradient(160deg, #3a8ddd 0%, #3083d4 52%, #2877c8 100%);
+}
+
+.canvas--shot {
+  width: 1280px;
+  height: 800px;
+}
+
+/* アイコンの「スピード線」を背景の飾りに使う */
+.speed {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: none;
+}
+
+.speed i {
+  display: block;
+  height: 10px;
+  border-radius: 5px;
+  background: #ffffff;
+  opacity: 0.28;
+}
+
+.speed i:nth-child(1) { width: 64px; }
+.speed i:nth-child(2) { width: 96px; margin-left: -22px; }
+.speed i:nth-child(3) { width: 52px; margin-left: 10px; }
+
+/* ---------- 見出し ---------- */
+.head {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 20px 5px 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.brand img {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+}
+
+.head h1 {
+  margin-top: 16px;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  word-break: auto-phrase;
+  text-shadow: 0 2px 12px rgba(10, 60, 120, 0.18);
+}
+
+.head .lead {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  word-break: auto-phrase;
+  text-shadow: 0 1px 6px rgba(10, 50, 110, 0.28);
+}
+
+/* 「※画面はイメージです」（どのスクリーンショットでも右上の同じ位置） */
+.note {
+  position: absolute;
+  top: 12px;
+  right: 22px;
+  z-index: 3;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(10, 50, 110, 0.3);
+}
+
+/* ---------- ブラウザ枠 ---------- */
+.browser {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow:
+    0 2px 6px rgba(10, 50, 100, 0.12),
+    0 30px 70px rgba(10, 50, 100, 0.32);
+}
+
+/* 下端を画像の外まで伸ばして「続きがある」見せ方にする */
+.browser--bleed {
+  border-radius: 16px 16px 0 0;
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 56px;
+  padding: 0 20px;
+  background: #edf1f6;
+  border-bottom: 1px solid #dde4ec;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dots i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #c9d2dc;
+}
+
+.address {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  min-width: 0;
+  padding: 0 18px;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #6b7785;
+  font-family: "Segoe UI", "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.address svg {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  color: #8a96a3;
+}
+
+.address b {
+  color: #1d2733;
+  font-weight: 500;
+}
+
+.viewport {
+  position: relative;
+  width: var(--vw);
+  height: var(--vh);
+  overflow: hidden;
+}
+
+/* --scale 倍で拡大して表示する。iframe 内は本物の content.css / content.js */
+.viewport iframe {
+  display: block;
+  width: calc(var(--vw) / var(--scale));
+  height: calc(var(--vh) / var(--scale));
+  border: 0;
+  transform: scale(var(--scale));
+  transform-origin: 0 0;
+  color-scheme: light;
+}
+
+.viewport iframe.is-dark {
+  color-scheme: dark;
+}
+
+.browser--dark {
+  background: #202124;
+}
+
+.browser--dark .browser-bar {
+  background: #2d2f33;
+  border-bottom-color: #3c4043;
+}
+
+.browser--dark .dots i {
+  background: #55595f;
+}
+
+.browser--dark .address {
+  background: #202124;
+  color: #9aa0a6;
+}
+
+.browser--dark .address b {
+  color: #e8eaed;
+}
+
+/* ---------- 白パネル ---------- */
+.panel {
+  position: absolute;
+  border-radius: 20px;
+  background: var(--panel);
+  box-shadow:
+    0 2px 6px rgba(10, 50, 100, 0.1),
+    0 24px 60px rgba(10, 50, 100, 0.26);
+}
+
+/* ---------- 吹き出し・ラベル ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--navy);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(10, 50, 100, 0.22);
+}
+
+.tag--box {
+  background: var(--box-light);
+  color: #4a2c06;
+}
+
+/* ---------- 吹き出し（段ボール色） ---------- */
+.callout {
+  position: absolute;
+  z-index: 2;
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: var(--box-light);
+  color: #4b2c07;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  box-shadow: 0 10px 26px rgba(110, 64, 10, 0.28);
+}
+
+/* 左向きの矢印 */
+.callout::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-style: solid;
+  border-width: 11px 12px 11px 0;
+  border-color: transparent var(--box-light) transparent transparent;
+}
+
+/* 上向きの矢印 */
+.callout--up::before {
+  top: -11px;
+  left: var(--arrow-x, 40px);
+  margin-top: 0;
+  border-width: 0 11px 12px 11px;
+  border-color: transparent transparent var(--box-light) transparent;
+}
+
+.callout small {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: #6a4512;
+}
+
+/* ---------- プロモーションタイル ---------- */
+.canvas--small {
+  width: 440px;
+  height: 280px;
+}
+
+.canvas--marquee {
+  width: 1400px;
+  height: 560px;
+}
+
+/* 背景と同系色のアイコンが埋もれないよう、白い縁取りと影をつける（角丸はアイコン画像に合わせる） */
+.app-icon {
+  display: block;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.6),
+    0 12px 28px rgba(10, 50, 100, 0.32);
+}
+
+.app-name {
+  color: #ffffff;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-shadow: 0 3px 14px rgba(10, 60, 120, 0.22);
+}
+
+/*
+ * icons/icon128.png のスピード線とほっぺは半透明で、背景が透けて見える。
+ * 青い背景に直接置くとほっぺが紫がかるため、タイルより少し小さい白い角丸を下に敷いて
+ * 白背景に置いたときと同じ見た目にする（store-icon-128.png と同じ考え方）。
+ */
+.icon-wrap {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  line-height: 0;
+}
+
+.icon-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 3.125%;
+  border-radius: 25%;
+  background: #ffffff;
+}
+
+.icon-wrap img {
+  position: relative;
+  display: block;
+}

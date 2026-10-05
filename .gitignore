@@ -11,7 +11,8 @@ Desktop.ini
 .idea/
 *.swp
 
-# 配布用パッケージ
+# 配布用パッケージ（scripts/package.ps1 の出力先）
+dist/
 *.zip
 *.crx
 *.pem

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<!--
+  ストア画像用のモック検索結果ページ。
+  実在サービスの UI は再現せず、汎用的なスケルトンだけで構成している。
+  拡張機能本体の content.css / content.js をそのまま読み込むので、
+  mock-serp.html?q=<伝票番号> を開くと本物のカードが #rcnt の先頭に差し込まれる。
+
+  クエリパラメータ（content.js は q しか読まない）
+    q        検索語（必須）
+    bare=1   検索ボックスやダミー結果を出さず、カードだけを透明背景で表示する
+    col=<px> 検索結果カラム（カード）の幅（320〜800。範囲外は無視して既定幅）
+-->
+<title>検索結果（モック）</title>
+<link rel="stylesheet" href="mock-serp.css">
+<link rel="stylesheet" href="../../content.css">
+</head>
+<body>
+<header class="serp-header">
+  <div class="searchbox" role="search">
+    <span class="searchbox-text" id="mock-query"></span>
+    <span class="searchbox-clear" aria-hidden="true"></span>
+    <svg class="searchbox-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </div>
+  <nav class="tabs" aria-hidden="true">
+    <span class="tab is-active"></span><span class="tab"></span><span class="tab"></span><span class="tab"></span><span class="tab tab--short"></span>
+  </nav>
+</header>
+
+<div id="rcnt">
+  <div class="result" aria-hidden="true">
+    <div class="result-site"><span class="favicon"></span><span class="line line--site"></span></div>
+    <div class="line line--title"></div>
+    <div class="line line--text"></div>
+    <div class="line line--text line--short"></div>
+  </div>
+  <div class="result" aria-hidden="true">
+    <div class="result-site"><span class="favicon"></span><span class="line line--site"></span></div>
+    <div class="line line--title line--title-b"></div>
+    <div class="line line--text"></div>
+    <div class="line line--text line--short-b"></div>
+  </div>
+  <div class="result" aria-hidden="true">
+    <div class="result-site"><span class="favicon"></span><span class="line line--site"></span></div>
+    <div class="line line--title line--title-c"></div>
+    <div class="line line--text"></div>
+    <div class="line line--text line--short"></div>
+  </div>
+  <div class="result" aria-hidden="true">
+    <div class="result-site"><span class="favicon"></span><span class="line line--site"></span></div>
+    <div class="line line--title"></div>
+    <div class="line line--text"></div>
+    <div class="line line--text line--short-b"></div>
+  </div>
+</div>
+
+<script src="mock-serp.js"></script>
+<!-- 拡張機能の本物のロジック -->
+<script src="../../content.js"></script>
+</body>
+</html>

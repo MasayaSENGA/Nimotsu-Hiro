@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>screenshot-4 1280x800</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  /* ---- 判定ルール（運送会社ごと） ---- */
+  .rules {
+    position: absolute;
+    top: 238px;
+    left: 64px;
+    right: 64px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .rule {
+    position: relative;
+    height: 156px;
+    padding: 20px 22px 0;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(10, 50, 100, 0.1), 0 18px 44px rgba(10, 50, 100, 0.24);
+  }
+
+  /* 運送会社の色は content.css のボタンと同じ */
+  .carrier {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .carrier--yamato { background: #fee100; color: #000000; }
+  .carrier--sagawa { background: #004098; color: #ffffff; }
+  .carrier--japanpost { background: #ff0000; color: #ffffff; }
+
+  .rule-main {
+    margin-top: 12px;
+    color: var(--navy);
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+  }
+
+  .rule-sub {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  /* ---- 例 ---- */
+  .examples {
+    top: 414px;
+    left: 64px;
+    right: 64px;
+    height: 304px;
+    padding: 18px 28px 0;
+  }
+
+  .examples-title {
+    color: var(--navy);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+  }
+
+  .examples-title span {
+    margin-left: 12px;
+    color: var(--muted);
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  /* minmax(0, 1fr): 中の iframe 枠（556px）が列幅を押し広げないようにして、左右の列を同じ幅にそろえる */
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 12px;
+  }
+
+  .query {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .query-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 18px 0 14px;
+    border: 1px solid #dfe1e5;
+    border-radius: 20px;
+    color: #202124;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    box-shadow: 0 1px 3px rgba(32, 33, 36, 0.1);
+  }
+
+  .query-box svg {
+    width: 18px;
+    height: 18px;
+    color: var(--blue);
+  }
+
+  .query-box .last {
+    border-radius: 3px;
+    background: linear-gradient(transparent 12%, #fbdc9a 12%, #fbdc9a 92%, transparent 92%);
+    color: #7a4300;
+    font-weight: 700;
+  }
+
+  .badge {
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 17px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .badge--ok { background: #e2f4ec; color: #0b6e4a; }
+  .badge--ng { background: #fde8e6; color: #b42318; }
+
+  /* iframe 内の余白（左右10px・上8px）×1.1 倍ぶんずらして、カードの端を列にそろえる */
+  .example .viewport {
+    margin: 4px 0 0 -11px;
+  }
+
+  .example-note {
+    margin-top: -2px;
+    color: var(--muted);
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .example-note b {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .footnote {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 28px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-shadow: 0 1px 6px rgba(10, 50, 110, 0.28);
+  }
+</style>
+</head>
+<body>
+<main class="canvas canvas--shot">
+  <div class="speed" style="left: 70px; top: 40px;" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="speed" style="right: 70px; top: 40px; transform: scaleX(-1);" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <p class="note">※画面はイメージです</p>
+
+  <header class="head">
+    <div class="brand"><span class="icon-wrap"><img src="../../icons/icon128.png" alt=""></span><span>にもつひろ</span></div>
+    <h1>番号のルールで運送会社をしぼり込み</h1>
+    <p class="lead">桁数とチェックディジットで判定して、当てはまる運送会社だけを表示します。</p>
+  </header>
+
+  <section class="rules">
+    <div class="rule">
+      <span class="carrier carrier--yamato">ヤマト運輸</span>
+      <p class="rule-main">12桁</p>
+      <p class="rule-sub">末尾のチェックディジットが一致</p>
+    </div>
+    <div class="rule">
+      <span class="carrier carrier--sagawa">佐川急便</span>
+      <p class="rule-main">10〜14桁</p>
+      <p class="rule-sub">12桁ならチェックディジットも確認</p>
+    </div>
+    <div class="rule">
+      <span class="carrier carrier--japanpost">日本郵便</span>
+      <p class="rule-main">11〜13桁</p>
+      <p class="rule-sub">国際郵便は EM123456789JP 形式</p>
+    </div>
+  </section>
+
+  <section class="panel examples">
+    <p class="examples-title">例：最後の1桁だけがちがう2つの番号<span>どちらも12桁</span></p>
+    <div class="examples-grid">
+      <div class="example">
+        <div class="query">
+          <span class="query-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>1234-5678-901<span class="last">3</span></span></span>
+          <span class="badge badge--ok">チェックディジット一致</span>
+        </div>
+        <div class="viewport" style="--vw: 556px; --vh: 144px; --scale: 1.1;">
+          <iframe src="mock-serp.html?q=1234-5678-9013&amp;bare=1" title="カードの例"></iframe>
+        </div>
+        <p class="example-note">→ <b>3社</b>のボタンを表示</p>
+      </div>
+      <div class="example">
+        <div class="query">
+          <span class="query-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>1234-5678-901<span class="last">2</span></span></span>
+          <span class="badge badge--ng">チェックディジット不一致</span>
+        </div>
+        <div class="viewport" style="--vw: 556px; --vh: 144px; --scale: 1.1;">
+          <iframe src="mock-serp.html?q=1234-5678-9012&amp;bare=1" title="カードの例"></iframe>
+        </div>
+        <p class="example-note">→ ヤマト運輸・佐川急便は<b>候補から外れます</b></p>
+      </div>
+    </div>
+  </section>
+
+  <p class="footnote">チェックディジット：先頭11桁を7で割った余りと、末尾の1桁が一致するかを確かめます。</p>
+</main>
+</body>
+</html>
