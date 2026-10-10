@@ -11,6 +11,10 @@ Desktop.ini
 .idea/
 *.swp
 
+# Chrome ウェブストアの掲載作業用の資料（手元だけで管理し、リポジトリには入れない）
+store/README.md
+store/listing.md
+
 # 配布用パッケージ（scripts/package.ps1 の出力先）
 dist/
 *.zip

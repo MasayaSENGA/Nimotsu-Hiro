@@ -16,7 +16,7 @@ https://chromewebstore.google.com/detail/ikjkommgenpjhpkoflciigpmmnkbakgp
 
 ### 開発者モードで読み込む
 
-このリポジトリは非公開です。開発中のコードを試す場合は、開発者モードで読み込みます。
+ストアを使わずに開発中のコードを試す場合は、開発者モードで読み込みます。
 
 1. このリポジトリを clone する
 2. Chrome で `chrome://extensions` を開く
@@ -68,7 +68,7 @@ content.css     差し込むカードのスタイル
 icons/          アイコン（16 / 48 / 128px）
 LICENSE         ライセンス（MIT）
 scripts/        配布用 ZIP の作成とストア画像の生成スクリプト
-store/          Chrome ウェブストアの掲載文・画像素材・公開手順
+store/          Chrome ウェブストアの掲載画像（assets/）と、その元になる HTML（src/）
 ```
 
 ストアに提出する ZIP に入るのは `manifest.json`・`content.js`・`content.css`・`icons/`・`LICENSE` だけです。
@@ -81,7 +81,7 @@ store/          Chrome ウェブストアの掲載文・画像素材・公開手
 
 ## Chrome ウェブストアへの公開
 
-更新版を出す手順は [store/README.md](store/README.md) にまとめています。アップロード用の ZIP は、リポジトリのルートで次のコマンドを実行すると `dist/nimotsu-hiro-<version>.zip` に作成されます。
+アップロード用の ZIP は、リポジトリのルートで次のコマンドを実行すると `dist/nimotsu-hiro-<version>.zip` に作成されます。
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\package.ps1
